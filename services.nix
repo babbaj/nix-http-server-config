@@ -21,12 +21,28 @@ let
                 "-base" "/home/babbaj/Pictures"
                 "-listen" "0.0.0.0:7893"
             ];
+            # doesn't actually do anything
             Volumes = {
                 "/opt/gb/" = {};
             };
         };
     };
 
+    simple-http-image = pkgs.dockerTools.buildImage {
+        name = "simple-http";
+        tag = "latest";
+
+        config = {
+            EntryPoint = [
+                "${pkgs.python3}/bin/python3"
+            ];
+            Cmd = [
+                "-m" "http.server"
+                "--directory" "/var/data"
+                "5021"
+            ];
+        };
+    };
 
 in
 {
@@ -43,6 +59,18 @@ in
             # apparently ExposedPorts does nothing
             ports = [
                 "7893:7893"
+            ];
+        };
+
+        simple-http = {
+            image = "simple-http";
+            imageFile = simple-http-image;
+            autoStart = true;
+            volumes = [
+                "/root/public:/var/data"
+            ];
+            ports = [
+                "5021:5021"
             ];
         };
     };
