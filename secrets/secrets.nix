@@ -4,4 +4,5 @@ let
 in
 {
     "httpAuth.age".publicKeys = [ me server ];
+    "wgKey.age".publicKeys = [ me server ];
 }

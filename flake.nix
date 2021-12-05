@@ -11,7 +11,7 @@
         };
 
         deploy.nodes.ovh-vps = {
-            hostname = "ovh";#"135.148.149.216";
+            hostname = "ovh";
             autoRollback = true;
 
             profiles.test = {
