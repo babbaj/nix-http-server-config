@@ -59,12 +59,18 @@
       };
 
       http = {
-        middlewares.no-kittens-allowed.basicAuth.usersFile = config.age.secrets.httpAuth.path;#"/var/lib/traefik/auth.txt";
+        middlewares.no-kittens-allowed.basicAuth.usersFile = config.age.secrets.httpAuth.path;
         middlewares.sts-headers.headers = {
           stsincludesubdomains = true;
           stspreload = true;
           stsseconds = 315360000;
           forcestsheader = true;
+        };
+        # this just returns the default page of the public file server
+        middlewares.cringe-404.errors = {
+          status = [ "404" ];
+          service = "simpleHttpPublic";
+          query = "/";
         };
 
         routers.gbRouter = {
@@ -77,7 +83,7 @@
 
         routers.publicRouter = {
           rule = "Host(`memes.medium.faith`)";  
-          middlewares = [ "sts-headers" ];
+          middlewares = [ "sts-headers" "cringe-404" ];
           tls.certResolver = "le";
           service = "simpleHttpPublic";
         };

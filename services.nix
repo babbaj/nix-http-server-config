@@ -21,25 +21,21 @@ let
                 "-base" "/home/babbaj/Pictures"
                 "-listen" "0.0.0.0:7893"
             ];
-            # doesn't actually do anything
-            Volumes = {
-                "/opt/gb/" = {};
-            };
         };
     };
 
-    simple-http-image = pkgs.dockerTools.buildImage {
-        name = "simple-http";
+    miniserve-image = pkgs.dockerTools.buildImage {
+        name = "miniserve";
         tag = "latest";
 
         config = {
             EntryPoint = [
-                "${pkgs.python3}/bin/python3"
+                "${pkgs.miniserve}/bin/miniserve"
             ];
             Cmd = [
-                "-m" "http.server"
-                "--directory" "/var/data"
-                "5021"
+                "-p" "5021"
+                "--index" "${./index.html}" # 404
+                "/var/data"
             ];
         };
     };
@@ -62,9 +58,9 @@ in
             ];
         };
 
-        simple-http = {
-            image = "simple-http";
-            imageFile = simple-http-image;
+        miniserve = {
+            image = "miniserve";
+            imageFile = miniserve-image;
             autoStart = true;
             volumes = [
                 "/root/public:/var/data"
