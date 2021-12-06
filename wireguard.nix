@@ -6,6 +6,7 @@
     age.secrets.wgKey.file = ./secrets/wgKey.age;
 
     networking.firewall.allowedUDPPorts = [ 14031 ];
+    #networking.firewall.trustedInterfaces = [ "wg0" ];
     
     networking.wireguard.interfaces = {
         wg0 = {
@@ -26,6 +27,10 @@
                 {
                     allowedIPs = [ "192.168.70.88/32" ];
                     publicKey = "Q8yPJ7BxP796QeSRgBhm12aVbIi/Upyf5NxntH8bC3A=";
+                }
+                {
+                    allowedIPs = [ "192.168.70.89/32" ];
+                    publicKey = "8FpQH1M5vygIPM0jno0upHczJBgL8gue3JgXW2djTgk=";
                 }
             ];
         };

@@ -74,7 +74,8 @@
         };
 
         routers.gbRouter = {
-          rule = "Host(`gb.medium.faith`)";
+          #rule = "Host(`gb.medium.faith`)";
+          rule = "ClientIP(`192.168.70.0/24`)"; # wireguard only
           middlewares = [ "sts-headers" "no-kittens-allowed" ];
           tls.certResolver = "le";
           service = "gb";

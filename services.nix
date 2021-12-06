@@ -18,7 +18,7 @@ let
                 "-database-file" "/opt/gb/.gb.db"
                 "proxy"
                 "-label" "nixos backblaze"
-                "-base" "/home/babbaj/Pictures"
+                "-base" "/"
                 "-listen" "0.0.0.0:7893"
             ];
         };
