@@ -69,12 +69,12 @@
         # this just returns the default page of the public file server
         middlewares.cringe-404.errors = {
           status = [ "404" ];
-          service = "simpleHttpPublic";
+          service = "publicFiles";
           query = "/";
         };
 
         routers.gbRouter = {
-          #rule = "Host(`gb.medium.faith`)";
+          #rule = "Host(`gb.babbaj.dev`)";
           rule = "ClientIP(`192.168.70.0/24`)"; # wireguard only
           middlewares = [ "sts-headers" "no-kittens-allowed" ];
           tls.certResolver = "le";
@@ -82,13 +82,13 @@
         };
         services.gb = port 7893;
 
-        routers.publicRouter = {
-          rule = "Host(`memes.medium.faith`)";  
+        routers.filesRouter = {
+          rule = "Host(`memes.babbaj.dev`)";  
           middlewares = [ "sts-headers" "cringe-404" ];
           tls.certResolver = "le";
-          service = "simpleHttpPublic";
+          service = "publicFiles";
         };
-        services.simpleHttpPublic = port 5021;
+        services.publicFiles = port 5021;
       };
     };
   };
