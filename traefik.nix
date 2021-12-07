@@ -9,6 +9,13 @@
     owner = "traefik";
     group = "traefik";
   };
+  age.secrets.dnsToken = {
+    file = ./secrets/dnsToken.age;
+    owner = "traefik";
+    group = "traefik";
+  };
+
+  systemd.services.traefik.environment.CF_DNS_API_TOKEN_FILE = config.age.secrets.dnsToken.path;
   
   services.traefik = 
   let
@@ -36,7 +43,11 @@
         keyType = "RSA4096";
         storage = "/var/lib/traefik/acme.json";
         #caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"; # debugging
-        httpChallenge.entryPoint = "web";
+        #httpChallenge.entryPoint = "web";
+        dnsChallenge = {
+          provider = "cloudflare";
+          delayBeforeCheck = 0;
+        };
       };
     };
 
@@ -74,10 +85,10 @@
         };
 
         routers.gbRouter = {
-          #rule = "Host(`gb.babbaj.dev`)";
-          rule = "ClientIP(`192.168.70.0/24`)"; # wireguard only
+          rule = "Host(`gb.babbaj.dev`) && ClientIP(`192.168.70.0/24`)"; # wireguard only
           middlewares = [ "sts-headers" "no-kittens-allowed" ];
           tls.certResolver = "le";
+          #tls.domains.main = "gb.babbaj.dev";
           service = "gb";
         };
         services.gb = port 7893;

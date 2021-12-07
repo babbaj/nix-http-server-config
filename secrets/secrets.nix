@@ -5,4 +5,5 @@ in
 {
     "httpAuth.age".publicKeys = [ me server ];
     "wgKey.age".publicKeys = [ me server ];
+    "dnsToken.age".publicKeys = [ me server ];
 }
