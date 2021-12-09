@@ -30,10 +30,9 @@ let
 
         config = {
             EntryPoint = [
-                "${pkgs.go}/bin/go"
+                "${pkgs.callPackage ./go-serve.nix {}}/bin/serve"
             ];
             Cmd = [
-               "run" "${./serve.go}"
                "-d" "/var/data"
             ];
             Volumes = {
