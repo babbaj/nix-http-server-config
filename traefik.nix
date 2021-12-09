@@ -43,7 +43,6 @@
         keyType = "RSA4096";
         storage = "/var/lib/traefik/acme.json";
         #caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"; # debugging
-        #httpChallenge.entryPoint = "web";
         dnsChallenge = {
           provider = "cloudflare";
           delayBeforeCheck = 0;
@@ -80,15 +79,15 @@
         # this just returns the default page of the public file server
         middlewares.cringe-404.errors = {
           status = [ "404" ];
-          service = "publicFiles";
+          service = "miniserve-404";
           query = "/";
         };
+        services.miniserve-404 = port 404;
 
         routers.gbRouter = {
           rule = "Host(`gb.babbaj.dev`) && ClientIP(`192.168.70.0/24`)"; # wireguard only
           middlewares = [ "sts-headers" "no-kittens-allowed" ];
           tls.certResolver = "le";
-          #tls.domains.main = "gb.babbaj.dev";
           service = "gb";
         };
         services.gb = port 7893;

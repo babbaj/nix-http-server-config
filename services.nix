@@ -24,19 +24,21 @@ let
         };
     };
 
-    miniserve-image = pkgs.dockerTools.buildImage {
-        name = "miniserve";
+    goserve-image = pkgs.dockerTools.buildImage {
+        name = "goserve";
         tag = "latest";
 
         config = {
             EntryPoint = [
-                "${pkgs.miniserve}/bin/miniserve"
+                "${pkgs.go}/bin/go"
             ];
             Cmd = [
-                "-p" "5021"
-                "--index" "${./index.html}" # 404
-                "/var/data"
+               "run" "${./serve.go}"
+               "-d" "/var/data"
             ];
+            Volumes = {
+                "/tmp" = {};
+            };
         };
     };
 in
@@ -57,15 +59,29 @@ in
             ];
         };
 
-        miniserve = {
+        miniserve-404 = {
             image = "miniserve";
-            imageFile = miniserve-image;
+            autoStart = true;
+            volumes = [
+                "${./index.html}:/index.html"
+            ];
+            cmd = [
+                "/index.html"
+            ];
+            ports = [
+                "404:8080"
+            ];
+        };
+
+        go-serve = {
+            image = "goserve";
+            imageFile = goserve-image;
             autoStart = true;
             volumes = [
                 "/root/public:/var/data"
             ];
             ports = [
-                "5021:5021"
+                "5021:8100"
             ];
         };
     };
