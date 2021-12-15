@@ -1,4 +1,4 @@
-{ stdenv, lib, go }:
+{ stdenv, go }:
 
 stdenv.mkDerivation {
   pname = "go-serve";

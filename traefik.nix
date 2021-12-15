@@ -76,7 +76,6 @@
           stsseconds = 315360000;
           forcestsheader = true;
         };
-        # this just returns the default page of the public file server
         middlewares.cringe-404.errors = {
           status = [ "404" ];
           service = "miniserve-404";
@@ -99,6 +98,31 @@
           service = "publicFiles";
         };
         services.publicFiles = port 5021;
+
+        routers.torrentsRouter = {
+          rule = "Host(`media.babbaj.dev`) && ClientIP(`192.168.70.0/24`)";  
+          middlewares = [ "sts-headers" "cringe-404" ];
+          tls.certResolver = "le";
+          service = "torrents";
+        };
+        routers.trollRouter = {
+          rule = "Host(`movies.babbaj.dev`)";  
+          middlewares = [ "sts-headers" "cringe-404" ];
+          tls.certResolver = "le";
+          service = "torrents";
+        };
+        services.torrents = port 2222;
+
+        middlewares.sky-auth.basicAuth.users = [
+          "mason:$apr1$ZkeZYeJA$NXObCPdtZ/IZOn65rFDJV1"
+        ];
+        routers.renderRouter = {
+          rule = "Host(`skymason.babbaj.dev`)";  
+          middlewares = [ "sts-headers" "sky-auth" "cringe-404" ];
+          tls.certResolver = "le";
+          service = "skyRender";
+        };
+        services.skyRender = port 2147;
       };
     };
   };

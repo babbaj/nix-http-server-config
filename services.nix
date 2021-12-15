@@ -44,6 +44,8 @@ in
 {
     virtualisation.docker.enable = true;
 
+    age.secrets.piaLoginEnv.file = ./secrets/piaLoginEnv.age;
+
     virtualisation.oci-containers.containers = {
         gb-proxy = {
             image = "gb-proxy";
@@ -81,6 +83,59 @@ in
             ];
             ports = [
                 "5021:8100"
+            ];
+        };
+
+        qbittorrent = {
+            image = "guillaumedsde/alpine-qbittorrent-openvpn";
+            autoStart = true;
+            volumes = [
+                "/root/torrents:/downloads"
+                "/root/qbittorrent_config:/config"
+            ];
+            ports = [
+                "6969:8080"
+            ];
+
+            extraOptions = [ "--cap-add=NET_ADMIN" ];
+            environment = {
+                OPENVPN_PROVIDER = "PIA";
+                OPENVPN_CONFIG = "ca_toronto";
+                LAN = "192.168.70.0/24"; # wireguard
+                PUID = "1000";
+                PGID = "1000";
+            };
+            environmentFiles = [
+                config.age.secrets.piaLoginEnv.path
+            ];
+        };
+        
+        miniserve-torrents = {
+            image = "miniserve";
+            autoStart = true;
+            volumes = [
+                "/root/torrents:/data"
+            ];
+            cmd = [
+                "/data"
+            ];
+            ports = [
+                "2222:8080"
+            ];
+        };
+
+        miniserve-skyrender = {
+            image = "miniserve";
+            autoStart = true;
+            volumes = [
+                "/root/skyrender:/data"
+            ];
+            cmd = [
+                "--index" "index.html"
+                "/data"
+            ];
+            ports = [
+                "2147:8080"
             ];
         };
     };

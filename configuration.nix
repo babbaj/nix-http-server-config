@@ -7,6 +7,7 @@
     ./services.nix
     ./gb-proxy.nix
     ./wireguard.nix
+    ./scripts.nix
   ];
 
   boot.cleanTmpDir = true;
