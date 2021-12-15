@@ -9,6 +9,12 @@
     owner = "traefik";
     group = "traefik";
   };
+  age.secrets.skyAuth = {
+    file = ./secrets/skyAuth.age;
+    path = "/var/lib/traefik/skyauth.txt";
+    owner = "traefik";
+    group = "traefik";
+  };
   age.secrets.dnsToken = {
     file = ./secrets/dnsToken.age;
     owner = "traefik";
@@ -113,9 +119,7 @@
         };
         services.torrents = port 2222;
 
-        middlewares.sky-auth.basicAuth.users = [
-          "mason:$apr1$ZkeZYeJA$NXObCPdtZ/IZOn65rFDJV1"
-        ];
+        middlewares.sky-auth.basicAuth.usersFile = config.age.secrets.skyAuth.path;
         routers.renderRouter = {
           rule = "Host(`skymason.babbaj.dev`)";  
           middlewares = [ "sts-headers" "sky-auth" "cringe-404" ];

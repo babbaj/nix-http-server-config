@@ -8,4 +8,5 @@ in
     "dnsToken.age".publicKeys = [ me server ];
     "piaLoginEnv.age".publicKeys = [ me server ];
     "nitwitIp.age".publicKeys = [ me server ];
+    "skyAuth.age".publicKeys = [ me server ];
 }
