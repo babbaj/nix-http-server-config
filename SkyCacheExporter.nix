@@ -2,15 +2,15 @@
 
 let 
     pname = "sky-cache-exporter";
-    version = "2021-12-15";
+    version = "2021-12-16";
 
     src = builtins.fetchGit {
         url = "ssh://git@github.com/nerdsinspace/SkyCacheExporter.git";
-        rev = "ac7cc1d5d25f4ff01043258d06dd2d0aa931ba69";
+        rev = "5b60860aa57b58e4cfdea24c524774ace76f987f";
     };
 
     jar = stdenv.mkDerivation {
-        pname = "${pname}-${version}-jar.jar";
+        name = "${pname}-${version}-jar.jar";
         inherit src version;
 
         nativeBuildInputs = [ gradle_6 ];
@@ -26,7 +26,7 @@ let
 
         outputHashAlgo = "sha256";
         outputHashMode = "flat";
-        outputHash = "sha256-DrXm/psQE0+jF02OkieE6YgkrZmoUQlqRbGZEqODYuU=";
+        outputHash = "sha256-XmDlaAm+mH++5d0zGp91rVTQpaTtDhfeqc5uY22QEVw=";
     };  
     
 in
