@@ -56,12 +56,12 @@ in
             ];
             # apparently ExposedPorts does nothing
             ports = [
-                "7893:7893"
+                "127.0.0.1:7893:7893"
             ];
         };
 
         miniserve-404 = {
-            image = "miniserve";
+            image = "svenstaro/miniserve";
             autoStart = true;
             volumes = [
                 "${./index.html}:/index.html"
@@ -70,7 +70,7 @@ in
                 "/index.html"
             ];
             ports = [
-                "404:8080"
+                "127.0.0.1:404:8080"
             ];
         };
 
@@ -82,7 +82,7 @@ in
                 "/root/public:/var/data"
             ];
             ports = [
-                "5021:8100"
+                "127.0.0.1:5021:8100"
             ];
         };
 
@@ -94,7 +94,7 @@ in
                 "/root/qbittorrent_config:/config"
             ];
             ports = [
-                "6969:8080"
+                "127.0.0.1:6969:8080"
             ];
 
             extraOptions = [ "--cap-add=NET_ADMIN" ];
@@ -111,7 +111,7 @@ in
         };
         
         miniserve-torrents = {
-            image = "miniserve";
+            image = "svenstaro/miniserve";
             autoStart = true;
             volumes = [
                 "/root/torrents:/data"
@@ -120,12 +120,12 @@ in
                 "/data"
             ];
             ports = [
-                "2222:8080"
+                "127.0.0.1:2222:8080"
             ];
         };
 
         miniserve-skyrender = {
-            image = "miniserve";
+            image = "svenstaro/miniserve";
             autoStart = true;
             volumes = [
                 "/root/skyrender:/data"
@@ -135,7 +135,7 @@ in
                 "/data"
             ];
             ports = [
-                "2147:8080"
+                "127.0.0.1:2147:8080"
             ];
         };
     };

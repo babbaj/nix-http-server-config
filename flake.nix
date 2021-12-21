@@ -5,9 +5,13 @@
     inputs.agenix.url = "github:ryantm/agenix";
 
     outputs = { self, nixpkgs, deploy-rs, agenix }: {
-        nixosConfigurations.gb-ovh-system = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.ovh-system = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = [ ./configuration.nix agenix.nixosModules.age ];
+            modules = [ ./ovh-hardware.nix ./configuration.nix agenix.nixosModules.age ];
+        };
+        nixosConfigurations.hetzner-system = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [ ./hetzner-hardware.nix ./configuration.nix agenix.nixosModules.age ];
         };
 
         deploy.nodes.ovh-vps = {
@@ -17,7 +21,18 @@
             profiles.test = {
                 sshUser = "root";
                 user = "root";
-                path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.gb-ovh-system;
+                path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ovh-system;
+            };
+        };
+
+        deploy.nodes.hetzner-dedicated = {
+            hostname = "h";
+            autoRollback = true;
+
+            profiles.main = {
+                sshUser = "root";
+                user = "root";
+                path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hetzner-system;
             };
         };
 
