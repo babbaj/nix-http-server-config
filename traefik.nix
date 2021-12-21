@@ -127,6 +127,14 @@
           service = "skyRender";
         };
         services.skyRender = port 2147;
+
+        routers.qbittorrentRouter = {
+          rule = "Host(`qbit.babbaj.dev`) && ClientIP(`192.168.70.0/24`)";
+          middlewares = [ "sts-headers" "cringe-404" ];
+          tls.certResolver = "le";
+          service = "qbittorrent";
+        };
+        services.qbittorrent = port 6969;
       };
     };
   };
