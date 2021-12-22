@@ -26,6 +26,7 @@
   script = pkgs.writeScript "skycache-update.sh" ''
     #!${pkgs.stdenv.shell}
     set -e
+    set -x
     
     function cleanup {
         echo "Removing /tmp dirs"

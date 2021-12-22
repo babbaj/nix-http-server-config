@@ -42,10 +42,11 @@ let
     };
 in
 {
-    virtualisation.docker.enable = true;
+    #virtualisation.docker.enable = true;
 
     age.secrets.piaLoginEnv.file = ./secrets/piaLoginEnv.age;
-
+    
+    virtualisation.oci-containers.backend = "podman";
     virtualisation.oci-containers.containers = {
         gb-proxy = {
             image = "gb-proxy";
@@ -125,7 +126,7 @@ in
         };
 
         miniserve-skyrender = {
-            image = "svenstaro/miniserve";
+            image = "svenstaro/miniserve   ";
             autoStart = true;
             volumes = [
                 "/root/skyrender:/data"
