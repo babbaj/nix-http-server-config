@@ -126,7 +126,7 @@ in
         };
 
         miniserve-skyrender = {
-            image = "svenstaro/miniserve   ";
+            image = "svenstaro/miniserve";
             autoStart = true;
             volumes = [
                 "/root/skyrender:/data"
