@@ -91,7 +91,7 @@ in
             image = "guillaumedsde/alpine-qbittorrent-openvpn";
             autoStart = true;
             volumes = [
-                "/root/torrents:/downloads"
+                "/torrents:/downloads"
                 "/root/qbittorrent_config:/config"
             ];
             ports = [
@@ -115,7 +115,7 @@ in
             image = "svenstaro/miniserve";
             autoStart = true;
             volumes = [
-                "/root/torrents:/data"
+                "/torrents:/data"
             ];
             cmd = [
                 "/data"
@@ -140,4 +140,6 @@ in
             ];
         };
     };
+
+    services.jellyfin.enable = true;
 }

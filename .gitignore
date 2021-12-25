@@ -1,1 +1,3 @@
 auth
+.deploy-gc/
+rescue.nix
