@@ -46,7 +46,7 @@ in
 
     age.secrets.piaLoginEnv.file = ./secrets/piaLoginEnv.age;
     
-    virtualisation.oci-containers.backend = "podman";
+    #virtualisation.oci-containers.backend = "podman";
     virtualisation.oci-containers.containers = {
         gb-proxy = {
             image = "gb-proxy";
@@ -101,7 +101,7 @@ in
             extraOptions = [ "--cap-add=NET_ADMIN" ];
             environment = {
                 OPENVPN_PROVIDER = "PIA";
-                OPENVPN_CONFIG = "ca_toronto";
+                OPENVPN_CONFIG = "de_frankfurt";
                 LAN = "192.168.70.0/24"; # wireguard
                 PUID = "1000";
                 PGID = "1000";

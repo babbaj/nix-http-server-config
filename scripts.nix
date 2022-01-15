@@ -53,6 +53,7 @@
     time mapcrafter -c ${mapcrafterConfig} -j 4
 
     rsync $rsyncargs -a --delete /tmp/mapcrafter-output/ /root/skyrender/
+    gb --config-file=/root/.gb.conf backup $skycache
   '';
 
   sky-exporter = pkgs.callPackage ./SkyCacheExporter.nix {};
@@ -60,7 +61,7 @@
   in {
     description = "Download chunk cache and update mapcrafter render";
     startAt = "hourly";
-    path = with pkgs; [ rsync openssh mapcrafter sky-exporter ];
+    path = with pkgs; [ rsync openssh mapcrafter sky-exporter gb-backup ];
     serviceConfig = {
       ExecStart = "${script}";
     };
