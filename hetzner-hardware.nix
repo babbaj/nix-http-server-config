@@ -41,14 +41,14 @@
   nixpkgs.overlays = [
     (self: super:
       {
-          bcachefs-tools = super.bcachefs-tools.overrideAttrs ({...}: {
-              src = pkgs.fetchFromGitHub {
-                  owner = "koverstreet";
-                  repo = "bcachefs-tools";
-                  rev = "00f49f23b4c37865618c74a5cb3a65308a9c511d";
-                  sha256 = "sha256-77nfbW3Ww4JCOl9LaYXXqD5VhTJzyON6FDGX46rVuoQ=";
-              };
-          });
+        bcachefs-tools = super.bcachefs-tools.overrideAttrs ({...}: {
+            src = pkgs.fetchFromGitHub {
+                owner = "koverstreet";
+                repo = "bcachefs-tools";
+                rev = "00f49f23b4c37865618c74a5cb3a65308a9c511d";
+                sha256 = "sha256-77nfbW3Ww4JCOl9LaYXXqD5VhTJzyON6FDGX46rVuoQ=";
+            };
+        });
       })
   ];
 

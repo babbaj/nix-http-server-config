@@ -5,10 +5,10 @@ buildGoModule {
   version = "unstable-2021-11-01";
 
   src = fetchFromGitHub {
-    owner = "leijurv";
+    owner = "babbaj";
     repo = "gb";
-    rev = "a30388bda97666123ddb9f2bf870ac40ada3b583";
-    sha256 = "sha256-s1zfcgjwdcM9KDumvviIF2K2Tx1V3MJ4z4wtgacxgfM=";
+    rev = "7abfabeef7da8cd23d9891941c966dc99b35ecd9";
+    sha256 = "sha256-ESQxGqJyE1Pk7VQverTO+w6QMdxACulP+NEEOsKIgD0=";
   };
 
   vendorSha256 = "sha256-H3Zf4VNJVX9C3GTeqU4YhNqCIQz1R55MfhrygDgJTxc=";

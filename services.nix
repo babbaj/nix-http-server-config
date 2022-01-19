@@ -140,6 +140,4 @@ in
             ];
         };
     };
-
-    services.jellyfin.enable = true;
 }
