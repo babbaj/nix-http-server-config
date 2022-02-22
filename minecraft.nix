@@ -1,6 +1,8 @@
 { config, pkgs, ... }: 
 
 {
+    networking.firewall.allowedTCPPorts = [ 25565 ];
+
     services.minecraft-server = {
         enable = true;
         package = pkgs.papermc;
@@ -10,7 +12,6 @@
             "fr1kin" = "21810c8f-d0e5-4cbd-bd9a-c22826b9d97a";
             "HaltAccount" = "95e980b1-e81c-4a24-80d3-d03e823cbf9c";
         };
-        openFirewall = true;
         serverProperties = {
             server-port = 25565;
             difficulty = "hard";
@@ -19,7 +20,7 @@
             motd = "NixOS Minecraft server!";
             white-list = true;
             enable-rcon = true;
-            "rcon.password" = "yay!";
+            "rcon.password" = "lol";
         };
         declarative = true;
         eula = true;
