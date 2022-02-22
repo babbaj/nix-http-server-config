@@ -1,3 +1,4 @@
 auth
 .deploy-gc/
 rescue.nix
+result/

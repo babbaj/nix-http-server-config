@@ -7,7 +7,10 @@
     ./gb-proxy.nix
     ./wireguard.nix
     ./scripts.nix
+    ./minecraft.nix
   ];
+
+  #nixpkgs.config.allowUnfree = true;
 
   boot.cleanTmpDir = true;
   networking.firewall.allowPing = true;

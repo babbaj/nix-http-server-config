@@ -27,6 +27,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-id/ata-ST2000NM0033-9ZM175_Z1X0GVYB-part2:/dev/disk/by-id/ata-ST2000NM0033-9ZM175_Z1X0GVAA-part2";
       fsType = "bcachefs";
+      options = [ "compression=zstd" ];
     };
 
   fileSystems."/boot" =
