@@ -18,11 +18,11 @@
   boot.loader.grub.device = "/dev/sda";
   networking.hostName = "hetzner";
 
-  boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor (pkgs.linux_testing_bcachefs.override ({
-                date = "2021-12-21";
-                commit = "d3422f9b18ea3154abe19d859f1a61c4fae9ccdc";
-                diffHash = "sha256-skXpBEpUEnXvTRCJPZsOk+393biAQh1IckevD/z1/DY=";
-            })));
+  /*boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor (pkgs.linux_testing_bcachefs.override ({
+                date = "2022-03-21";
+                commit = "c38b7167aa5f3b1b91dcc93ade57f30e95064590";
+                diffHash = "sha256-qWNXf+8UhJhw+g3AiHENZaHtwwJhp0JILCDq2mFmOxQ=";
+            })));*/
 
   fileSystems."/" =
     { device = "/dev/disk/by-id/ata-ST2000NM0033-9ZM175_Z1X0GVYB-part2:/dev/disk/by-id/ata-ST2000NM0033-9ZM175_Z1X0GVAA-part2";
@@ -46,8 +46,8 @@
             src = pkgs.fetchFromGitHub {
                 owner = "koverstreet";
                 repo = "bcachefs-tools";
-                rev = "00f49f23b4c37865618c74a5cb3a65308a9c511d";
-                sha256 = "sha256-77nfbW3Ww4JCOl9LaYXXqD5VhTJzyON6FDGX46rVuoQ=";
+                rev = "f3cdace86c8b60a4efaced23b2d31c16dc610da9";
+                sha256 = "sha256-KfTaBY2FE5xT/03czwu+Uwc+kqYy1FpHryB7orNk5ME=";
             };
         });
       })

@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, gb-pr21-src, ... }:
 
 {
   age.secrets.nitwitIp.file = ./secrets/nitwitIp.age;
 
   systemd.services.update-sky = 
-  let mapcrafterConfig = pkgs.writeText "mapcrafter-config" ''
+  let
+  mapcrafterConfig = pkgs.writeText "mapcrafter-config" ''
     output_dir = /tmp/mapcrafter-output
 
     [world:world]
@@ -53,15 +54,16 @@
     time mapcrafter -c ${mapcrafterConfig} -j 4
 
     rsync $rsyncargs -a --delete /tmp/mapcrafter-output/ /root/skyrender/
-    gb --config-file=/root/.gb.conf backup $skycache
+    gb --config-file=/root/.gb.conf backup --no-database-history $skycache
   '';
 
   sky-exporter = pkgs.callPackage ./SkyCacheExporter.nix {};
   mapcrafter = pkgs.callPackage ./mapcrafter.nix {};
+  gb-patched = pkgs.callPackage ./gb.nix { src = gb-pr21-src; };
   in {
     description = "Download chunk cache and update mapcrafter render";
     startAt = "hourly";
-    path = with pkgs; [ rsync openssh mapcrafter sky-exporter gb-backup ];
+    path = with pkgs; [ rsync openssh mapcrafter sky-exporter gb-patched ];
     serviceConfig = {
       ExecStart = "${script}";
     };

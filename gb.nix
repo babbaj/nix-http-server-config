@@ -1,17 +1,13 @@
-{ lib, makeWrapper, buildGoModule, fetchFromGitHub, lepton }:
+{ src # flake input
+, lib, makeWrapper, buildGoModule, fetchFromGitHub, lepton }:
 
 buildGoModule {
   pname = "gb-backup";
   version = "unstable-2021-11-01";
 
-  src = fetchFromGitHub {
-    owner = "babbaj";
-    repo = "gb";
-    rev = "7abfabeef7da8cd23d9891941c966dc99b35ecd9";
-    sha256 = "sha256-ESQxGqJyE1Pk7VQverTO+w6QMdxACulP+NEEOsKIgD0=";
-  };
+  inherit src;
 
-  vendorSha256 = "sha256-H3Zf4VNJVX9C3GTeqU4YhNqCIQz1R55MfhrygDgJTxc=";
+  vendorSha256 = "sha256-m+J0keS+RzfTqdm7jYKrNIm/Fy9fN7P4gig3bWoIqJI=";
 
   nativeBuildInputs = [ makeWrapper ];
 
