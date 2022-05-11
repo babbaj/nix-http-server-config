@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-nix run github:serokell/deploy-rs -- -k
+nix shell github:serokell/deploy-rs -c deploy -k

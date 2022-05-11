@@ -24,13 +24,17 @@
             '';
 
             peers = [
-                {
+                {   # desktop
                     allowedIPs = [ "192.168.70.88/32" ];
                     publicKey = "Q8yPJ7BxP796QeSRgBhm12aVbIi/Upyf5NxntH8bC3A=";
                 }
-                {
+                {   # phone
                     allowedIPs = [ "192.168.70.89/32" ];
                     publicKey = "8FpQH1M5vygIPM0jno0upHczJBgL8gue3JgXW2djTgk=";
+                }
+                {   # macbook
+                    allowedIPs = [ "192.168.70.90/32" ];
+                    publicKey = "oZrUn/rkDovRm2lL40j6ojm5J+roSpkYrzalvF5OHVY=";
                 }
             ];
         };

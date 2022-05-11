@@ -26,7 +26,9 @@ let
 
         outputHashAlgo = "sha256";
         outputHashMode = "flat";
-        outputHash = "sha256-XmDlaAm+mH++5d0zGp91rVTQpaTtDhfeqc5uY22QEVw=";
+        #outputHash = "sha256-XmDlaAm+mH++5d0zGp91rVTQpaTtDhfeqc5uY22QEVw=";
+        # I think there's an impurity or unpinned dependency
+        outputHash = "sha256-/ac7uxmOG76Ha+l/IPP9aJdRqDhW5FOx/0B+Y/HjlLU=";
     };  
     
 in
